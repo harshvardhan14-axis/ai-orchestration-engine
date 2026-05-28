@@ -8,12 +8,15 @@ export async function POST(
   req: Request
 ) {
   try {
-    const body =
-      await req.json();
+    const {
+      prompt,
+      provider,
+    } = await req.json();
 
     const result =
       await runPipeline(
-        body.prompt || ""
+        prompt || "",
+        provider || "groq"
       );
 
     return NextResponse.json(

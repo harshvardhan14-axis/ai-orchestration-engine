@@ -15,6 +15,11 @@ export default function HomePage() {
   const [stage, setStage] =
     useState("");
 
+  const [
+    selectedProvider,
+    setSelectedProvider,
+  ] = useState("groq");
+
   async function handleGenerate() {
     try {
       setLoading(true);
@@ -47,6 +52,8 @@ export default function HomePage() {
 
             body: JSON.stringify({
               prompt,
+              provider:
+                selectedProvider,
             }),
           }
         );
@@ -106,6 +113,7 @@ export default function HomePage() {
         </div>
 
         <div className="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+
           <textarea
             value={prompt}
             onChange={(e) =>
@@ -116,6 +124,36 @@ export default function HomePage() {
             placeholder="Describe the app you want to build..."
             className="w-full h-40 bg-black border border-zinc-700 rounded-lg p-4 text-white"
           />
+
+          <div className="mt-4">
+            <label className="block mb-2 text-sm text-gray-400">
+              Select AI Provider
+            </label>
+
+            <select
+              value={
+                selectedProvider
+              }
+              onChange={(e) =>
+                setSelectedProvider(
+                  e.target.value
+                )
+              }
+              className="w-full bg-black border border-zinc-700 rounded-lg p-3 text-white"
+            >
+              <option value="groq">
+                Groq
+              </option>
+
+              <option value="gemini">
+                Gemini
+              </option>
+
+              <option value="openrouter">
+                OpenRouter
+              </option>
+            </select>
+          </div>
 
           <button
             onClick={
@@ -312,3 +350,4 @@ export default function HomePage() {
     </main>
   );
 }
+
