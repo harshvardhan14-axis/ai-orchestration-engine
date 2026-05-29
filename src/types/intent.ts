@@ -1,15 +1,7 @@
 import { z } from "zod";
 
-export const AppTypeSchema = z.enum([
-  "crm",
-  "project_management",
-  "ecommerce",
-  "hr_tool",
-  "inventory",
-  "content_platform",
-  "analytics",
-  "custom",
-]);
+export const AppTypeSchema =
+  z.string().min(1);
 
 export const AppIntentSchema = z.object({
   appName: z.string().min(1),
